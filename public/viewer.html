@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Thunder snapshot</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <style>
+    body { font: 14px/1.5 ui-monospace, Menlo, Consolas, monospace;
+           background:#0e1116; color:#d8dee4; margin:0; padding:1rem 1.5rem 4rem; }
+    h1 { color:#7CFC7C; margin:0 0 .3em; font-size:1.4rem; }
+    h2 { color:#cbd6e2; font-size:1rem; margin:1.6em 0 .4em;
+         border-bottom:1px solid #232830; padding-bottom:.2em; }
+
+    .meta-grid { display:grid; grid-template-columns: max-content 1fr; gap:.2em 1em; }
+    .meta-grid b { color:#9ad6ff; font-weight:normal; }
+
+    .stats { display:grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
+             gap:.6em; margin:.8em 0; }
+    .stat  { background:#1a1f27; padding:.6em .8em; border-radius:6px; }
+    .stat .v { font-size:1.4rem; color:#7CFC7C; }
+    .stat .l { opacity:.65; font-size:.8rem; }
+
+    .chart-box      { background:#1a1f27; padding:.6em; border-radius:6px; position:relative; }
+    .chart-box.tall { height: 320px; }
+    .chart-box.wide { height: 220px; }
+    .chart-box canvas { width:100% !important; height:100% !important; display:block; }
+
+    table { width:100%; border-collapse:collapse; }
+    th, td { padding:.35em .6em; text-align:left; border-bottom:1px solid #232830; }
+    th { color:#9ad6ff; font-weight:normal; }
+    .err { color:#FF7C7C; }
+    details pre { max-height:300px; overflow:auto; background:#1a1f27;
+                  padding:.6em; border-radius:6px; }
+
+    .sec-group { background:#141921; border:1px solid #232830; border-radius:6px;
+                 margin:.4em 0; overflow:hidden; }
+    .sec-group > summary { list-style:none; cursor:pointer; padding:.45em .8em;
+                           display:grid;
+                           grid-template-columns: 1.2em 1fr 80px 80px 70px 60px 90px;
+                           align-items:center; gap:.6em;
+                           background:#1a1f27; }
+    .sec-group > summary::-webkit-details-marker { display:none; }
+    .sec-group > summary .tri { color:#7CFC7C; transition:transform .15s; }
+    .sec-group[open] > summary .tri { transform:rotate(90deg); }
+    .sec-group > summary .gname { color:#9ad6ff; }
+    .sec-group > summary .meta { opacity:.55; font-size:.85em; }
+
+    .sec-row { border-top:1px solid #1f242c; }
+    .sec-row > summary { list-style:none; cursor:pointer; padding:.4em .8em .4em 2em;
+                         display:grid;
+                         grid-template-columns: 1.2em 1fr 90px 80px 80px 70px 60px;
+                         align-items:center; gap:.6em; }
+    .sec-row > summary::-webkit-details-marker { display:none; }
+    .sec-row > summary:hover { background:#1a1f27; }
+    .sec-row > summary .tri { color:#666; transition:transform .15s; }
+    .sec-row[open] > summary .tri { transform:rotate(90deg); color:#7CFC7C; }
+    .sec-row .name { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .sec-row .avg  { color:#FFD27C; text-align:right; }
+    .sec-row .max  { color:#FF7C7C; text-align:right; opacity:.85; }
+    .sec-row .calls{ opacity:.7; text-align:right; }
+    .sec-row .pct  { opacity:.7; text-align:right; }
+    .sec-row .spark svg { display:block; }
+
+    .sec-detail { padding:.8em 1em 1em 2em; background:#10141a;
+                  border-top:1px dashed #232830; }
+    .sec-detail .chart-host { height:180px; background:#1a1f27;
+                              border-radius:6px; padding:.4em; }
+    .sec-detail .kv { margin-top:.5em; opacity:.75; font-size:.85em; }
+    .sec-detail .kv span { margin-right:1.2em; }
+  </style>
+</head>
+<body>
+  <h1>⚡ Thunder snapshot</h1>
+  <div id="root">loading…</div>
+  <script src="/viewer.js"></script>
+</body>
+</html>
